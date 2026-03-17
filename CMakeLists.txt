@@ -22,6 +22,7 @@ find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rmcs_description REQUIRED)
 find_package(rmcs_executor REQUIRED)
+find_package(rmcs_msgs REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(yaml-cpp REQUIRED)
 set(OpenVINO_DIR "/opt/intel/openvino_2024.6.0/runtime/cmake/" CACHE PATH "OpenVINO CMake directory")
@@ -73,6 +74,7 @@ ament_target_dependencies(
   rclcpp
   rmcs_description
   rmcs_executor
+  rmcs_msgs
 )
 
 pluginlib_export_plugin_description_file(rmcs_executor plugins.xml)
@@ -111,6 +113,7 @@ ament_export_dependencies(
   rclcpp
   rmcs_description
   rmcs_executor
+  rmcs_msgs
   spdlog
   yaml-cpp
 )

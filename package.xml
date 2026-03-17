@@ -15,6 +15,7 @@
   <depend>rclcpp</depend>
   <depend>rmcs_description</depend>
   <depend>rmcs_executor</depend>
+  <depend>rmcs_msgs</depend>
 
   <export>
     <build_type>ament_cmake</build_type>

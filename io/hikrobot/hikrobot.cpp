@@ -11,7 +11,7 @@ HikRobot::HikRobot(double exposure_ms, double gain, const std::string & vid_pid)
     hikcamera::Config config;
     config.exposure_us = static_cast<float>(exposure_ms * 1e3);
     config.gain = static_cast<float>(gain);
-    config.framerate = 150.0F;
+    config.framerate = 165.0F;
     camera_.configure(config);
 
     if (!vid_pid.empty()) {
