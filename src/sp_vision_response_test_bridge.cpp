@@ -222,6 +222,9 @@ public:
     }
 
     void update() override {
+        if (*update_count_ % 10 != 0)
+            return;
+
         if (!start_time_initialized_) {
             start_time_ = *timestamp_;
             start_time_initialized_ = true;
