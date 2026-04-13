@@ -1,12 +1,12 @@
 #ifndef IO__HIKROBOT_HPP
 #define IO__HIKROBOT_HPP
 
-#include <atomic>
 #include <chrono>
+#include <memory>
 #include <opencv2/opencv.hpp>
 #include <string>
 
-#include "hikcamera/capturer.hpp"
+#include "hikcamera/image_capturer.hpp"
 #include "io/camera.hpp"
 
 namespace io
@@ -19,12 +19,7 @@ public:
     void read(cv::Mat & img, std::chrono::steady_clock::time_point & timestamp) override;
 
 private:
-    void ensure_connected();
-
-    hikcamera::Camera camera_;
-    std::atomic<bool> quit_{false};
-    std::chrono::steady_clock::time_point next_retry_log_time_ =
-        std::chrono::steady_clock::time_point::min();
+    std::unique_ptr<hikcamera::ImageCapturer> camera_;
 };
 
 }  // namespace io
