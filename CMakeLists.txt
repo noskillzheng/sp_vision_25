@@ -23,6 +23,7 @@ find_package(rclcpp REQUIRED)
 find_package(rmcs_description REQUIRED)
 find_package(rmcs_executor REQUIRED)
 find_package(rmcs_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(yaml-cpp REQUIRED)
 set(OpenVINO_DIR "/opt/intel/openvino_2024.6.0/runtime/cmake/" CACHE PATH "OpenVINO CMake directory")
@@ -42,8 +43,11 @@ add_subdirectory(tasks/omniperception)
 add_library(
   ${PROJECT_NAME}
   SHARED
-  src/sp_vision_bridge.cpp
-  src/sp_vision_response_test_bridge.cpp
+  src/bridge/sp_vision_bridge.cpp
+  src/bridge/sp_vision_response_test_bridge.cpp
+  src/bridge/camera_preview_bridge.cpp
+  src/bridge/calibration_capture_bridge.cpp
+  src/bridge/hard_sync_snapshot_provider.cpp
   $<TARGET_OBJECTS:tools>
   $<TARGET_OBJECTS:auto_aim>
   $<TARGET_OBJECTS:omniperception>
@@ -75,9 +79,25 @@ ament_target_dependencies(
   rmcs_description
   rmcs_executor
   rmcs_msgs
+  sensor_msgs
 )
 
 pluginlib_export_plugin_description_file(rmcs_executor plugins.xml)
+
+# Calibration tools (standalone executables)
+add_executable(calibrate_camera calibration/calibrate_camera.cpp $<TARGET_OBJECTS:tools>)
+target_link_libraries(calibrate_camera ${OpenCV_LIBS} fmt::fmt spdlog::spdlog yaml-cpp)
+
+add_executable(calibrate_handeye calibration/calibrate_handeye.cpp $<TARGET_OBJECTS:tools>)
+target_link_libraries(calibrate_handeye ${OpenCV_LIBS} fmt::fmt spdlog::spdlog yaml-cpp)
+
+add_executable(calibrate_robotworld_handeye calibration/calibrate_robotworld_handeye.cpp $<TARGET_OBJECTS:tools>)
+target_link_libraries(calibrate_robotworld_handeye ${OpenCV_LIBS} fmt::fmt spdlog::spdlog yaml-cpp)
+
+install(
+  TARGETS calibrate_camera calibrate_handeye calibrate_robotworld_handeye
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
 
 install(
   TARGETS ${PROJECT_NAME}
@@ -114,6 +134,7 @@ ament_export_dependencies(
   rmcs_description
   rmcs_executor
   rmcs_msgs
+  sensor_msgs
   spdlog
   yaml-cpp
 )

@@ -13,3 +13,21 @@ testvideos/
 watchdog.sh
 records_24/
 records_25/
+
+# AI tooling artifacts (do NOT push to remote)
+.serena/
+.claude/
+.claude.json
+.codex/
+.cursor/
+.cursorrules
+.aider*
+.windsurf/
+.continue/
+.github/copilot-instructions.md
+CLAUDE.md
+CLAUDE.local.md
+GEMINI.md
+.specstory/
+.ai/
+ai_docs/

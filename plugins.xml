@@ -5,4 +5,13 @@
   <class
     type="sp_vision_25::bridge::SpVisionResponseTestBridge"
     base_class_type="rmcs_executor::Component" />
+  <class
+    type="sp_vision_25::bridge::CameraPreviewBridge"
+    base_class_type="rmcs_executor::Component" />
+  <class
+    type="sp_vision_25::bridge::CalibrationCaptureBridge"
+    base_class_type="rmcs_executor::Component" />
+  <class
+    type="sp_vision_25::bridge::HardSyncSnapshotProvider"
+    base_class_type="rmcs_executor::Component" />
 </library>

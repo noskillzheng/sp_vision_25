@@ -37,6 +37,7 @@ public:
   void update(const Armor & armor);
 
   Eigen::VectorXd ekf_x() const;
+  int armor_count() const;
   const tools::ExtendedKalmanFilter & ekf() const;
   std::vector<Eigen::Vector4d> armor_xyza_list() const;
 
